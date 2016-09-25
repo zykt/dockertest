@@ -3,15 +3,17 @@ version: '2'
 services:
   app:
     build: .
-    command: run.py 
+    command: python run.py 
     volumes:
       - .:/code
-    ports:
-      - "8000:8000"
-    depends_on:
+    links:
       - mongo
       - redis
   mongo:
     image: mongo:latest
+    expose:
+      - "27017"
   redis:
     image: redis:latest
+    expose: 
+      - "6379"
